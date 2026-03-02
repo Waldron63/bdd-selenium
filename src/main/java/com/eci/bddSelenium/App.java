@@ -1,4 +1,4 @@
-package com.eci.myproject;
+package com.eci.bddSelenium;
 
 /**
  * Hello world!

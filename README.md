@@ -49,7 +49,7 @@ Asegúrate de contar con los siguientes elementos antes de ejecutar el proyecto:
    cd bdd-selenium
    ```
 2. Asegúrate de tener instalado Java 17 y Maven.
-3. Instala Google Chrome y descarga la versión de [ChromeDriver](https://chromedriver.chromium.org/downloads) que corresponda a tu versión de Chrome. Coloca el binario en `/usr/local/bin/chromedriver` (Linux/Mac) o ajusta la ruta en `SearchSteps.java` y `HoversSteps.java`.
+3. Instala Google Chrome y descarga la versión de [ChromeDriver](https://googlechromelabs.github.io/chrome-for-testing/) que corresponda a tu versión de Chrome. Coloca el binario en `/usr/local/bin/chromedriver` (Linux/Mac) o ajusta la ruta en `SearchSteps.java` y `HoversSteps.java`.
 4. Descarga las dependencias del proyecto:
    ```bash
    mvn install -DskipTests
@@ -68,7 +68,7 @@ bdd-selenium/
 ├── .gitignore
 ├── pom.xml
 └── src/
-    ├── main/com/eci/bddSelenium/          ← App.java (placeholder)
+    ├── main/java/com/eci/bddSelenium/          ← App.java (placeholder)
     └── test/
         └── java/
             └── com/

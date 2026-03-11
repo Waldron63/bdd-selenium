@@ -36,21 +36,24 @@ Asegúrate de contar con los siguientes elementos antes de ejecutar el proyecto:
 2. Haz clic en el botón **Code** → **Codespaces** → **Create codespace on main**.
 3. Espera a que el contenedor termine de construirse (Java, Maven y Chrome se instalan automáticamente).
 4. Una vez abierto el terminal integrado, instala las dependencias del proyecto:
+
    ```bash
    mvn install -DskipTests
    ```
-5. El entorno está listo para ejecutar las pruebas.
-
+   
 ### Localmente
 
 1. Clona el repositorio:
+
    ```bash
    git clone https://github.com/Waldron63/bdd-selenium.git
    cd bdd-selenium
    ```
+
 2. Asegúrate de tener instalado Java 17 y Maven.
 3. Instala Google Chrome y descarga la versión de [ChromeDriver](https://googlechromelabs.github.io/chrome-for-testing/) que corresponda a tu versión de Chrome. Coloca el binario en `/usr/local/bin/chromedriver` (Linux/Mac) o ajusta la ruta en `SearchSteps.java` y `HoversSteps.java`.
 4. Descarga las dependencias del proyecto:
+
    ```bash
    mvn install -DskipTests
    ```
@@ -68,22 +71,19 @@ bdd-selenium/
 ├── .gitignore
 ├── pom.xml
 └── src/
-    ├── main/java/com/eci/bddSelenium/          ← App.java (placeholder)
-    └── test/
-        └── java/
-            └── com/
-                └── eci/
-                    └── bddSelenium/
-                        ├── features/
-                        │   ├── google_search.feature
-                        │   └── hovers.feature
-                        ├── pages/
-                        │   └── HoversPage.java
-                        ├── runners/
-                        │   └── TestRunner.java
-                        └── steps/
-                            ├── HoversSteps.java
-                            └── SearchSteps.java
+    ├── main/java/com/eci/bddSelenium/
+    │                      └── App.java (placeholder)
+    └── test/java/com/eci/bddSelenium/
+                           ├── features/
+                           │   ├── google_search.feature
+                           │   └── hovers.feature
+                           ├── pages/
+                           │   └── HoversPage.java
+                           ├── runners/
+                           │   └── TestRunner.java
+                           └── steps/
+                               ├── HoversSteps.java
+                               └── SearchSteps.java
 ```
 
 ### Flujo de las pruebas con Selenium
@@ -96,7 +96,22 @@ Los tests siguen este ciclo de vida dentro de los archivos:
 4. **Runner** (`runners/TestRunner.java`): Orquesta la ejecución de todos los escenarios mediante `@CucumberOptions`, apuntando a la carpeta `features/` y al paquete `steps/`.
 5. **Reportes**: Al finalizar, Cucumber genera informes en `target/` en formato JUnit XML, JSON y HTML.
 
-### BDD
+---
+
+### BDD - definición de archivos:
+
+| Archivo | Tipo | Descripción |
+|---|---|---|
+| google_search.feature | Feature (Gherkin) | Define el escenario BDD que verifica que, al buscar "GitHub" en Google, el término aparezca en los resultados. Actúa como especificación ejecutable legible por humanos. |
+| hovers.feature | Feature (Gherkin) | Define el escenario BDD que valida que, al hacer hover sobre el primer usuario en la página de pruebas, se muestre el texto name: user1. |
+| HoversPage.java | Page Object | Encapsula los localizadores XPath de los elementos de la página de hovers y expone métodos reutilizables (hoverFirstUser, getFirstUsername) para mantener los pasos limpios. |
+| TestRunner.java | Runner (JUnit) | Orquesta la ejecución de todos los escenarios Cucumber, apuntando a la carpeta features/ y al paquete steps/, y configura la generación de reportes en XML, JSON y HTML. |
+| HoversSteps.java | Step Definitions | Implementa los pasos Given/When/Then del escenario de hovers: inicializa el ChromeDriver en modo headless, navega a la URL y delega las acciones a HoversPage. |
+| SearchSteps.java | Step Definitions | Implementa los pasos Given/When/Then del escenario de búsqueda en Google: gestiona el ciclo de vida del driver con @Before/@After, navega a Google, ejecuta la búsqueda y verifica el resultado. |
+
+---
+
+### BDD - Escenarios:
 
 #### `features/` — google_search
 
@@ -104,17 +119,17 @@ Los tests siguen este ciclo de vida dentro de los archivos:
 |---|---|
 | **Search for a term** | Abre la página de búsqueda de Google, ingresa el término "GitHub" en el campo de búsqueda y verifica que el término aparezca en el código fuente de la página de resultados. |
 
+<img width="830" height="286" alt="image" src="https://github.com/user-attachments/assets/4302942f-cef5-42e0-8ca5-b3216b8dc4d7" />
+
+
 #### `features/` — hovers
 
 | Escenario | Descripción |
 |---|---|
 | **Hover over first user and display profile** | Navega a la página de pruebas de *hovers* en [the-internet.herokuapp.com](https://the-internet.herokuapp.com/hovers), simula el movimiento del ratón sobre la primera figura de usuario y verifica que el texto "name: user1" sea visible en la leyenda que aparece. |
 
----
+<img width="828" height="282" alt="image" src="https://github.com/user-attachments/assets/c4947c87-cfa5-4af3-81ab-66431a4ee8b3" />
 
-## Ejecución
-
-<!-- Apartado reservado para agregar comandos de ejecución -->
 
 ---
 
